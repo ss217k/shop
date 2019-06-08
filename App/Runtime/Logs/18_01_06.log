@@ -1,0 +1,9 @@
+[ 2018-01-06T16:14:42+08:00 ] 0.0.0.0 /unicourse/
+NOTIC: [2] preg_replace(): The /e modifier is no longer supported, use preg_replace_callback instead /Users/lmerengues/Sites/Unicourse/ThinkPHP/Common/common.php 第 217 行.
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.020048s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.030803s ]
+NOTIC: [2] session_start(): Cannot send session cache limiter - headers already sent (output started at /Users/lmerengues/Sites/Unicourse/App/Conf/config.php:1) /Users/lmerengues/Sites/Unicourse/ThinkPHP/Common/functions.php 第 566 行.
+NOTIC: [8] Undefined variable: group /Users/lmerengues/Sites/Unicourse/ThinkPHP/Lib/Core/App.class.php 第 95 行.
+ERR: 无法加载模块:
+

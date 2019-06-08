@@ -1,0 +1,254 @@
+html {
+  font-size: 10px;
+}
+body {
+  background-color: #f6f6f6;
+}
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Helvetica Neue", Ubuntu, "Hiragino Sans GB", STHeiTi, "Microsoft YaHei", "微软雅黑", SimHei, "华文黑体";
+  font-size: 1.4rem;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none !important;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+.container {
+  min-width: 1023px;
+}
+.main {
+  min-height: 50rem;
+}
+.ng-hide {
+  display: none !important;
+}
+ul {
+  list-style: none;
+}
+ul li {
+  line-height: 2.5rem;
+}
+.query-area .panel,
+.query-area-1 .panel {
+  padding: 1.5rem 2rem;
+}
+.query-area .column,
+.query-area-1 .column {
+  padding: 0 2rem;
+  border-left: 1px solid #f6f6f6;
+  min-height: 20rem;
+}
+.query-area .column:first-child,
+.query-area-1 .column:first-child {
+  border-left: none;
+}
+.query-area .nav-tabs > li > a,
+.query-area-1 .nav-tabs > li > a {
+  margin-right: 0;
+}
+.time-list label,
+.building-list label {
+  font-weight: 400;
+  cursor: pointer;
+}
+.time-list label input,
+.building-list label input {
+  margin-right: 0.5rem;
+}
+.date-area .tab-content {
+  border: 1px solid #ddd;
+  border-top: none;
+  border-radius: 0 0 4px 4px;
+  padding: 1.5rem;
+}
+.week-area input.form-control,
+.week-area select.form-control {
+  display: inline-block;
+  width: 4em;
+}
+.room-block {
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.table-rooms > tbody > tr {
+  cursor: pointer;
+}
+.table-rooms > tbody > tr.active td,
+.table-rooms > tbody > tr.active:hover td {
+  background-color: #269abc;
+  color: #fff;
+}
+.table-container {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+.table-container table {
+  table-layout: fixed;
+}
+.table-container tr th,
+.table-container tr td {
+  text-align: center;
+  width: 100px;
+  min-height: 5rem;
+  vertical-align: middle;
+  font-size: 1.3rem;
+  overflow: hidden;
+}
+.table-container tr th:first-child,
+.table-container tr td:first-child {
+  width: 30px;
+}
+.table-container tr th.td-time,
+.table-container tr td.td-time {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.table-container tr th span,
+.table-container tr td span {
+  display: block;
+  margin: 0.5rem auto;
+  font-size: inherit;
+  vertical-align: middle;
+}
+.table-container th {
+  font-size: 1.4rem;
+}
+.table-container .td-disabled {
+  background-color: #ddd;
+  cursor: pointer;
+}
+.table-container .td-default {
+  background-color: transparent;
+  cursor: pointer;
+}
+.table-container .td-default:hover {
+  background-color: #f6f6f6;
+}
+.table-container .td-selected {
+  cursor: pointer;
+  background-color: #269abc;
+}
+.table-container thead {
+  background-color: #666;
+  color: #fff;
+}
+.table-container .ft_c tbody tr td:first-child {
+  background: #666;
+  color: #fff;
+}
+.table-container .ft_c tbody tr td:nth-child(2) {
+  display: none;
+}
+.table-container .ft_c tbody tr.tr-first td:nth-child(2) {
+  background-color: #666;
+  color: #fff;
+  display: table-cell;
+}
+.panel .title {
+  display: inline-block;
+}
+.panel .classinfo {
+  float: right;
+  margin: 1.5rem 0;
+}
+.panel .classinfo .info {
+  margin-right: 1rem;
+}
+.footer {
+  padding: 3rem 0;
+  text-align: center;
+}
+.progress-layer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.6);
+  z-index: 2;
+}
+.progress-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -50px;
+  margin-left: -200px;
+  height: 100px;
+  width: 400px;
+  padding: 20px 30px;
+  background: #fff;
+  border-radius: 5px;
+  text-align: center;
+}
+.progress-container .info {
+  line-height: 40px;
+}
+.login-layer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  z-index: 1001;
+  background-color: #f6f6f6;
+}
+.login-container h2 {
+  text-align: center;
+}
+.login-container .form-signin {
+  max-width: 330px;
+  padding: 15px;
+  margin: 0 auto;
+  position: relative;
+}
+.login-container .form-signin .form-control {
+  position: relative;
+  height: auto;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 10px;
+  font-size: 16px;
+}
+.login-container .form-signin .form-control:focus {
+  z-index: 2;
+}
+.login-container .form-signin input {
+  border-radius: 0;
+}
+.login-container .form-signin input[name="usernumber"] {
+  margin-bottom: -1px;
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+.login-container .form-signin input[name="code"] {
+  margin-bottom: 10px;
+  margin-top: -1px;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+.login-container .form-signin .btn-cancel {
+  text-align: center;
+  font-size: 14px;
+  color: #999;
+}
+.login-container .form-signin-heading {
+  height: 40px;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 40px;
+}
+.login-container #code {
+  position: absolute;
+  right: 25px;
+  top: 181px;
+  z-index: 3;
+}

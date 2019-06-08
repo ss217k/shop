@@ -1,0 +1,29 @@
+[ 2018-01-11T22:15:37+08:00 ] 0.0.0.0 /unicourse/
+NOTIC: [2] preg_replace(): The /e modifier is no longer supported, use preg_replace_callback instead /Users/lmerengues/Sites/Unicourse/ThinkPHP/Common/common.php 第 217 行.
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.001334s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002434s ]
+NOTIC: [2] session_start(): Cannot send session cookie - headers already sent by (output started at /Users/lmerengues/Sites/Unicourse/App/Conf/config.php:1) /Users/lmerengues/Sites/Unicourse/ThinkPHP/Common/functions.php 第 566 行.
+NOTIC: [2] session_start(): Cannot send session cache limiter - headers already sent (output started at /Users/lmerengues/Sites/Unicourse/App/Conf/config.php:1) /Users/lmerengues/Sites/Unicourse/ThinkPHP/Common/functions.php 第 566 行.
+NOTIC: [8] Undefined variable: group /Users/lmerengues/Sites/Unicourse/ThinkPHP/Lib/Core/App.class.php 第 95 行.
+ERR: 无法加载模块:
+
+[ 2018-01-11T22:16:17+08:00 ] 0.0.0.0 /unicourse/
+NOTIC: [2] preg_replace(): The /e modifier is no longer supported, use preg_replace_callback instead /Users/lmerengues/Sites/Unicourse/ThinkPHP/Common/common.php 第 217 行.
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000231s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000254s ]
+NOTIC: [2] session_start(): Cannot send session cache limiter - headers already sent (output started at /Users/lmerengues/Sites/Unicourse/App/Conf/config.php:1) /Users/lmerengues/Sites/Unicourse/ThinkPHP/Common/functions.php 第 566 行.
+NOTIC: [8] Undefined variable: group /Users/lmerengues/Sites/Unicourse/ThinkPHP/Lib/Core/App.class.php 第 95 行.
+ERR: 无法加载模块:
+
+[ 2018-01-11T22:20:13+08:00 ] 0.0.0.0 /unicourse/
+NOTIC: [2] preg_replace(): The /e modifier is no longer supported, use preg_replace_callback instead /Users/lmerengues/Sites/Unicourse/ThinkPHP/Common/common.php 第 217 行.
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.006439s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.006502s ]
+NOTIC: [2] session_start(): Cannot send session cookie - headers already sent by (output started at /Users/lmerengues/Sites/Unicourse/App/Conf/config.php:1) /Users/lmerengues/Sites/Unicourse/ThinkPHP/Common/functions.php 第 566 行.
+NOTIC: [2] session_start(): Cannot send session cache limiter - headers already sent (output started at /Users/lmerengues/Sites/Unicourse/App/Conf/config.php:1) /Users/lmerengues/Sites/Unicourse/ThinkPHP/Common/functions.php 第 566 行.
+NOTIC: [8] Undefined variable: group /Users/lmerengues/Sites/Unicourse/ThinkPHP/Lib/Core/App.class.php 第 95 行.
+ERR: 无法加载模块:
+

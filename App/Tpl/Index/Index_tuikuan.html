@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>用户退款单 || 家居饰品商城</title>
+    <meta name="description" content="家居饰品商城，开发者：周岩">
+    <meta name="keywords" content="家居饰品商城 | 周岩 | 黑龙江大学">
+    <link rel="shortcut icon" href="__PUBLIC__/image/icon/litIcon.ico">
+    <link href="__PUBLIC__/css/reset.css" rel="stylesheet" type="text/css" />
+    <link href="__PUBLIC__/css/page_car.css" rel="stylesheet" type="text/css" />
+    <link href="__PUBLIC__/css/page.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+    <!-- 顶部导航 -->
+    <div id="top">
+        <div class="car_wrap clear">
+                <div class="welcome fl">
+                        
+                    </div>
+            <div class="topRight fr clear">
+                <ul class="leftNav fl">
+                    <li>
+                       
+                    </li>
+                    <li class="myOrder">
+                        
+                    <li class="myLib">
+                       
+                        <div id="topLookTab">
+                            <ul class="looktabnav clear">
+                                
+                                <ul>
+                        </div>
+                    </li>
+                    </ul>
+                    <ul class="rightNav fr">
+                      
+                        <li><a title="退出系统" name="退出" href="{:U('Index/Index/quit')}" class="login_a">退出</a></li>
+                    </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /顶部导航 -->
+    <!-- logo与进度反馈区域 -->
+    <div id="logo_line" class="car_wrap clear">
+        <div class="logo fl">
+            <a href="index.html">
+                <img src="__PUBLIC__/image/logo.png" alt="家居饰品商城" title="欢迎进入家居饰品商城">
+            </a>
+        </div>
+        <div class="shopCar_tit fl">
+            <h1>所有退款单</h1>
+        </div>
+       
+    </div>
+    <div class="car_hr"></div>
+    <!-- /logo与进度反馈区域 -->
+    <div class="content_show_wrapper">
+        <div class="cart_notification cart_error" style="">
+            <div class="message">
+                <p></p>
+            </div>
+        </div>
+        <div id="group_show">
+            <div class="content_header clear">
+                
+                <div class="top_banner">
+                    <ul class="header_icons">
+                        <li> <span> <i class="icon_zhenpin header_icon png"></i> 真品防伪码 </span> </li>
+                        <li> <span> <i class="icon_tuihuo header_icon png"></i> 30天无条件退货 </span> </li>
+                        
+                    </ul>
+                </div>
+                
+            </div>
+            <div class="groups_wrapper">
+                <table class="cart_group_item  cart_group_item_product">
+                    <thead>
+                        <tr>
+                            <th class="cart_overview">
+                                <div class="cart_group_header">
+                                    
+                                </div>
+                            </th>
+                            <th class="cart_price">单价（元）</th>
+                            <th class="cart_num">数量</th>
+                            <th class="cart_total">        </th>
+                            <th class="cart_option">用户ID</th>
+                        </tr>
+                    </thead>
+                  
+                    <tbody class="hide">
+                        <foreach name="tk" item="b">
+                        <tr>
+                                <input type="hidden" value="{$b['tn']}" id="btn-bno"/>
+                            <td valign="top">
+                                <div class="cart_item_desc clear">
+                                    
+                                 
+                                    <div class="cart_item_desc_wrapper">
+                                        <a class="cart_item_pic"  target="_blank"> <img src="{$b['bimg']}" alt="{$b['bname']}"> <span class="sold_out_pic png"></span> </a> <a class="cart_item_link" title="{$b['cname']}"  target="_blank">{$b['bname']}</a>
+                                       
+                                        <div class="sale_info clear">
+                                            <div class="tips_pop_full float_box JS_tips_pop_full">
+                                                <div> <a class="sale_tag gift JS_sale_tag" data-promo-type="gift"> 满赠 <i class="icon_small png"></i> </a> </div>
+                                                <div class="pop_box JS_pop_box">
+                                                    <div><span class="arrow_t_1"><span class="arrow_t_2"></span></span>
+                                                    </div>
+                                                    
+                                                </div>
+                                            </div>
+                                            <div class="tips_pop_full float_box JS_tips_pop_full">
+                                                <div> <a class="sale_tag reduce JS_sale_tag" data-promo-type="reduce"> 满减 <i class="icon_small png"></i> </a> </div>
+                                                <div class="pop_box JS_pop_box">
+                                                    <div><span class="arrow_t_1"><span class="arrow_t_2"></span></span>
+                                                    </div>
+                                                    
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="cart_item_price">
+                                    <p class="jumei_price">{$b['bprice']}</p>
+                                    
+                                </div>
+                            </td>
+                            <td>
+                                <div class="cart_item_num ">
+                                    <div class="item_quantity_editer clear" data-item-key="1057066_d150603p892053zc"> 
+                                      <!-- <input class="item_quantity" value="{$b['cnt']}" type="text" id="btn-cnt"> --> 
+                                        <p class="jumei_price" type="text" id="btn-cnt">{$b['cnt']}</p> </div>
+                                    <div class="item_shortage_tip"> </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="cart_item_total">
+                                    <p class="item_total_price"></p>
+                                   
+                                </div>
+                            </td>
+                            <td>
+                                
+                                <div class="cart_item_num ">
+                                    <div class="item_quantity_editer clear" data-item-key="1057066_d150603p892053zc"> 
+                                      <!-- <input class="item_quantity" value="{$b['cnt']}" type="text" id="btn-cnt"> --> 
+                                        <a class="jumei_price" type="text" id="btn-cnt" href="{:U('Index/Index/address',array('umobile'=>$b['umobile'],'ono'=>$b['ono']))}">{$b['umobile']}</a> </div>
+                                    <div class="item_shortage_tip"> </div>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        </foreach>
+                    </tbody>
+                
+                    
+                </table>
+            </div>
+            <div class="common_handler_anchor"></div>
+            
+            
+        </div>
+      
+    </div>
+    <!-- 页尾链接和版权信息 -->
+    <div id="footer" class="">
+        
+       
+        <p class="padt10 textc cor2 lh20">版权所有&nbsp;&copy;&nbsp;黑龙江大学
+        </p>
+        
+    </div>
+    <!-- /页尾链接和版权信息 -->
+    <script src="__PUBLIC__/js/jquery-1.4.2.min.js"></script>
+    <script src="__PUBLIC__/js/imgTab.js"></script>
+
+    <script>
+            $(document).ready(function(){
+                var uid = $("#input-uid").val()
+                var cnt=$("#btn-cnt").val()
+                $(".login_a").hide()
+                console.log(cnt)
+                if(uid.length > 0){
+                    console.log("in")
+                    $(".a-notlogin").hide()
+                    $(".login_a").show() 
+                }
+            
+            })
+           
+            
+            
+        </script>
+</body>
+
+</html>

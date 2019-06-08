@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>中国人民大学教室查询系统</title>
+    <link rel="stylesheet" href="css/lib.css">
+    <link rel="stylesheet" href="css/index.css">
+  </head>
+  <body ng-controller="mainCtrl" ng-cloak>
+    <nav class="navbar navbar-default navbar-static-top">
+      <div class="container">
+        <div class="navbar-header"><a class="navbar-brand" href="javascript:void(0)">RUC教室查询系统</a></div>
+        <ul class="nav navbar-nav">
+          <li><a href="#/query" ng-class="{true: 'active'}[viewType === 'time']">按时间</a></li>
+          <li><a href="#/query2" ng-class="{true: 'active'}[viewType === 'room']">按教室</a></li>
+          <li><a href="#/history" ng-class="{true: 'active'}[viewType === 'room']">借出历史</a></li>
+          <li><a href="#/import" ng-class="{true: 'active'}[viewType === 'import']">课表导入</a></li>
+        </ul>
+      </div>
+    </nav>
+    <div class="main" ng-view></div>
+    <div class="script-container">
+      <script id="t-query" type="text/ng-template">
+        <div class="container query-area">
+          <form class="form panel" ng-submit="query()">
+            <div>
+              <h4>查询条件</h4>
+            </div>
+            <div class="row">
+              <div class="col-sm-4 column">
+                <div class="form-group">
+                  <label for="building">教学楼</label>
+                  <ul class="building-list">
+                    <li class="list-item" ng-repeat="t in buildingList">
+                      <label>
+                        <input type="checkbox" ng-model="t.checked"><span ng-bind="t.name"></span>
+                      </label>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="col-sm-4 column">
+                <div class="form-group">
+                  <label>时段</label>
+                  <ul class="time-list">
+                    <li class="list-item" ng-repeat="t in timeList">
+                      <label>
+                        <input type="checkbox" ng-model="t.checked" ng-change="changeQuery()"><span ng-bind="t.name"></span>
+                      </label>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="col-sm-4 column date-area">
+                <div class="form-group">
+                  <label for="roomType">教室类型</label>
+                  <select class="form-control" name="roomType" ng-model="q.roomType" ng-options="t.id as t.name for t in roomTypeList"></select>
+                </div>
+                <div class="form-group">
+                  <label for="capacity">规模</label>
+                  <div class="input-group">
+                    <input class="form-control" name="capacity" type="number" placeholder="" min="0" ng-model="q.roomSize"><span class="input-group-addon">人</span>
+                  </div>
+                </div>
+                <label>日期</label>
+                <div style="margin-bottom: 15px">
+                  <div ng-sem-selector query="q"></div>
+                </div>
+                <div class="week-area">第
+                  <input class="form-control" ng-model="week[0]" ng-change="changeQuery()" type="number" min="1" max="20">周 ~ 第
+                  <input class="form-control" ng-model="week[1]" ng-change="changeQuery()" type="number" min="1" max="20">周 星期
+                  <select class="form-control" ng-model="q.weekday" ng-options="t.id as t.name for t in weekdayList" ng-change="changeQuery()"></select>
+                </div>
+                <div style="margin-top: 1rem"><a href="http://www.ruc.edu.cn/calendar" target="_blank">参考校历</a></div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12">
+                <button class="btn btn-primary pull-right" type="submit" ng-class="{true: 'disabled'}[isQuerying]">查询</button>
+              </div>
+            </div>
+          </form>
+          <div class="panel" ng-controller="lendCtrl">
+            <div>
+              <h4>查询结果</h4>
+            </div>
+            <div>
+              <div ng-if="rooms &amp;&amp; !isQuerying">
+                <table class="table table-hover table-rooms" datatable="">
+                  <thead>
+                    <tr>
+                      <th>选择</th>
+                      <th>教学楼</th>
+                      <th>教室号</th>
+                      <th>教室类型</th>
+                      <th>教室规模</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr ng-repeat="t in rooms" ng-class="{true:'active'}[t.selected]" ng-click="t.selected = !t.selected">
+                      <td>
+                        <input type="checkbox" ng-model="t.selected">
+                      </td>
+                      <td ng-bind="t.bname"></td>
+                      <td ng-bind="t.crname"></td>
+                      <td ng-bind="t.crtype"></td>
+                      <td ng-bind="t.crsize_class"></td>
+                    </tr>
+                  </tbody>
+                </table>
+                <hr>
+                <div class="row">
+                  <div class="col-sm-12">
+                    <div class="form-group"><span>已选中:</span>
+                      <button class="btn btn-info room-block" ng-repeat="t in rooms" ng-bind="t.crname" ng-click="t.selected = false" ng-if="t.selected"></button>
+                    </div>
+                    <div class="form-group">
+                      <textarea class="form-control" placeholder="在此输入备注，如单子编号、借教室组织等" ng-model="q.remarks"></textarea>
+                    </div>
+                    <div class="form-group">
+                      <button class="btn btn-primary pull-right" type="button" ng-click="lend()">借出</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div ng-show="isQuerying">
+                <div class="progress">
+                  <div class="progress-bar progress-bar-striped active" style="width: 100%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </script>
+      <script id="t-query-2" type="text/ng-template">
+        <div class="container query-area-1">
+          <form class="form panel">
+            <div class="row">
+              <div class="col-sm-4">
+                <label>教学楼</label>
+                <select class="form-control" ng-model="building" ng-change="getCurrentRooms()" ng-options="t.bno as t.bname for t in buildings"></select>
+              </div>
+              <div class="col-sm-4">
+                <label>学期</label>
+                <div ng-sem-selector query="q" change="query()"></div>
+              </div>
+              <div class="col-sm-4">
+                <label>周数</label>
+                <input class="form-control" ng-model="week" ng-change="query()" type="nubmer" min="1" max="20">
+              </div>
+            </div>
+          </form>
+          <div class="panel">
+            <div class="clearfix">
+              <div class="classinfo" ng-if="room"><span class="info" ng-bind="room[3]"></span><span class="info">{{room[5]}}楼</span><span class="info"><strong ng-bind="room[4]"></strong></span><span class="info" ng-bind="room[7]"></span><span class="info">{{room[8]}} 人</span></div>
+            </div>
+            <div class="table-container" ng-if="roomData &amp;&amp; roomList &amp;&amp; !isQuerying">
+              <table class="table table-bordered table-classroom" ng-table-fixed>
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th>课节</th>
+                    <th ng-repeat="r in roomList" ng-bind="r | roomName"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="tr-first" ng-repeat-start="(k, w) in weekdayList">
+                    <td rowspan="7" ng-bind="w.name"></td>
+                    <td class="td-time" ng-bind="timeList[0].name"></td>
+                    <td ng-repeat="(i, r) in roomList" ng-class="['td-default', 'td-disabled', 'td-selected'][roomData[i].data[k * 7]]" ng-click="select(i, k, 0)"><span ng-bind="roomData[i].name[k * 7]"></span></td>
+                  </tr>
+                  <tr ng-repeat="(j, t) in timeList.slice(1)" ng-repeat-end>
+                    <td class="td-time" ng-bind="t.name"></td>
+                    <td ng-repeat="(i, r) in roomList" ng-class="['td-default', 'td-disabled', 'td-selected'][roomData[i].data[k * 7 + j + 1]]" ng-click="select(i, k, j + 1)"><span ng-bind="roomData[i].name[k * 7 + j + 1]"></span></td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="row" style="margin-top: 15px">
+                <div class="col-sm-12">
+                  <div class="form-group"><span>已选中:</span>
+                    <button class="btn btn-info room-block" ng-repeat="t in selects" ng-bind="roomName(t.room) + ' | 周' + t.weekday.name + ' | ' + t.period.name.split('(')[0]"></button>
+                  </div>
+                  <div class="form-group">
+                    <textarea class="form-control" placeholder="在此输入备注，如单子编号、借教室组织等" ng-model="remarks"></textarea>
+                  </div>
+                  <div class="form-group clearfix">
+                    <button class="btn btn-primary pull-right" type="button" ng-click="lend()">借出</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div ng-show="isQuerying">
+              <div class="progress">
+                <div class="progress-bar progress-bar-striped active" style="width: 100%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </script>
+      <script id="t-history" type="text/ng-template">
+        <div class="container">
+          <table class="table table-bordered" datatable dt-options="DT.options" dt-columns="DT.columns" dt-instance="DT.instance"></table>
+        </div>
+      </script>
+      <script id="t-history-btn" type="text/ng-template"><a class="btn btn-sm btn-default" href="javascript: void(0)" ng-click="recall($id)">撤销</a></script>
+      <script id="t-import" type="text/ng-template">
+        <div class="container query-area-1">
+          <form class="form panel">
+            <div class="row">
+              <div class="col-sm-4">
+                <label for="school_year_label">学年</label>
+                <select class="form-control" name="school_year" ng-model="q.school_year">
+                  <option value="2016-2017" selected="selected">2016-2017</option>
+                  <option value="2017-2018">2017-2018</option>
+                  <option value="2018-2019">2018-2019</option>
+                  <option value="2019-2020">2019-2020</option>
+                  <option value="2020-2021">2020-2021</option>
+                </select>
+              </div>
+              <div class="col-sm-4">
+                <label for="school_term_label">学期</label>
+                <select class="form-control" name="school_term" ng-model="q.school_term">
+                  <option value="秋季学期" selected="selected">秋季学期</option>
+                  <option value="春季学期">春季学期</option>
+                </select>
+              </div>
+              <div class="col-sm-4">
+                <label for="school_term_label">学期共有周数</label>
+                <div class="input-group">
+                  <input class="form-control" type="number" min="0" max="30" name="school_week_num" ng-model="q.school_week_num"><span class="input-group-addon">周</span>
+                </div>
+              </div>
+            </div>
+            <div class="form-group" style="margin-top: 15px">
+              <label for="upload_label">Excel课表(<a href="example.xls" target="_blank">模板</a>)</label>
+              <input type="file" nv-file-select="" uploader="uploader">
+              <div class="progress" ng-show="uploader.queue[0] &amp;&amp; uploader.queue[0].isUploading">
+                <div class="progress-bar" ng-style="{ 'width': uploader.progress + '%' }"></div>
+              </div>
+            </div>
+            <button class="btn btn-primary" type="button" ng-click="upload()" ng-disabled="!uploader.getNotUploadedItems().length">导入</button>
+          </form>
+        </div>
+      </script>
+    </div>
+    <footer class="footer"><span>Powered by UniCourse</span></footer>
+    <div class="progress-layer" ng-show="isProgressing">
+      <div class="progress-container">
+        <div class="info">正在处理，请稍候</div>
+        <div class="progress">
+          <div class="progress-bar progress-bar-striped active" style="width: 100%"></div>
+        </div>
+      </div>
+    </div>
+    <div class="login-layer ng-hide" ng-show="isLogging">
+      <div class="login-container">
+        <form class="form-signin" ng-submit="login()">
+          <h2 class="form-signin-heading">您需要先登录</h2>
+          <label class="sr-only" for="inputEmail">用户名</label>
+          <input class="form-control" type="text" name="usernumber" placeholder="用户名" required autofocus="" ng-model="user.usernumber">
+          <label class="sr-only" for="inputPassword">密码</label>
+          <input class="form-control" type="password" name="password" placeholder="密码" required ng-model="user.password">
+          <input class="form-control" type="text" name="code" placeholder="验证码" required ng-model="user.code"><img id="code" src="../../classroom/index/verify">
+          <button class="btn btn-lg btn-primary btn-block" type="submit">登录</button><a class="btn-cancel btn-lg btn-link btn-block" href="javascript: void(0)" ng-click="cancelLogin()">取消</a>
+        </form>
+      </div>
+    </div>
+    <script src="js/lib.min.js"></script>
+    <script src="js/index.js"></script>
+  </body>
+</html>
